@@ -1,0 +1,10 @@
+#container {
+  position: relative;
+}
+#container canvas,
+#instrument {
+  position: absolute;
+  margin: auto;
+  margin: 10%;
+  padding: 30px;
+}
