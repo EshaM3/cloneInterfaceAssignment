@@ -1,10 +1,10 @@
-#container {
-  position: relative;
-}
-#container canvas,
-#instrument {
-  position: absolute;
+/* #instrument {
   margin: auto;
-  margin: 10%;
+  padding: auto;
+  /* margin: 10%;
   padding: 30px;
+} 
+*/
+html {
+  background-color: burlywood;
 }
