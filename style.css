@@ -44,14 +44,14 @@ p {
   height: 80px;
   display: flex;
 }
-/* img {
+img {
   width: auto;
   height: 70%;
   align-self: center;
   margin: 10px;
-} */
-/* button {
+}
+button {
   border-radius: 50%;
   background: none;
   border: none;
-} */
+}
