@@ -1,7 +1,7 @@
 //create a synth and connect it to the main output (your speakers)
 // const synth = new Tone.Synth().toDestination();
 // synth.volume.value = -12;
-
+var keyboardInput = false;
 const KEYS = [
   "1",
   "!",
@@ -266,13 +266,21 @@ function setup() {
     lowNote: 36,
     highNote: 96,
   });
+  piano.colorize("accent", "gold");
 
   piano.on("change", function (v) {
     //only if key is pressed do we trigger a sound, not when it is released (prevents double-triggered notes)
     if (v.state == true) {
       players[v.note - 36].start();
+      if (!keyboardInput) {
+        inputBox.value = inputBox.value + KEYS[v.note - 36];
+      }
     }
   });
+
+  playbutton = document.querySelector("button");
+  playbutton.onclick = play;
+  inputBox = document.querySelector("input");
 }
 
 function draw() {
@@ -280,17 +288,44 @@ function draw() {
 }
 
 function keyPressed() {
+  keyboardInput = true;
   try {
-    const keyIndex = KEYS.indexOf(key);
-    players[keyIndex].start();
+    piano.toggleIndex(KEYS.indexOf(key), true);
   } catch (e) {}
 }
 
-// playbutton = document.querySelector(Button);
-// inputBox = document.querySelector(input);
+document.addEventListener("keyup", (event) => {
+  try {
+    piano.toggleIndex(KEYS.indexOf(event.key), false);
+  } catch (e) {}
+  keyboardInput = false;
+});
 
-// playbutton.onclick("play");
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-// function play(){
-//   for(i = 0; i < inputBox.va)
-// }
+const play = async () => {
+  playbutton.disabled = true;
+  keyboardInput = true;
+  console.log(inputBox.value);
+  for (const note in inputBox.value) {
+    try {
+      await sleep(300);
+      forTimeOut(inputBox.value[note]);
+    } catch (e) {}
+  }
+  playbutton.disabled = false;
+  keyboardInput = false;
+};
+
+function forTimeOut(note_) {
+  try {
+    piano.toggleIndex(KEYS.indexOf(note_), true);
+    setTimeout(forTimeOutPartTwo, 300, note_);
+  } catch (e) {}
+}
+
+function forTimeOutPartTwo(note_) {
+  try {
+    piano.toggleIndex(KEYS.indexOf(note_), false);
+  } catch (e) {}
+}

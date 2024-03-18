@@ -1,10 +1,3 @@
-/* #instrument {
-  margin: auto;
-  padding: auto;
-  /* margin: 10%;
-  padding: 30px;
-} 
-*/
 body {
   /* background-color: burlywood; */
   background-image: url("images/background2.avif");
@@ -12,17 +5,18 @@ body {
 }
 h1 {
   text-align: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: cursive;
   font-weight: 150;
-  font-size: 1.7em;
-  color: aliceblue;
+  font-size: 1.9em;
+  color: gold;
   padding: 3px;
   margin: 5px;
 }
 p {
-  color: rgb(164, 207, 244);
+  /* color: rgb(164, 207, 244); */
+  color: goldenrod;
   text-align: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 1em;
   padding: 3px;
   margin: 5px;
@@ -37,21 +31,32 @@ p {
   margin-top: 20px;
 }
 .textbox {
-  background-color: beige;
-  margin: 10px;
+  background-color: black;
+  border-color: gold;
+  color: gold;
+  margin: 20px;
   width: 100%;
-
-  height: 80px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1em;
+  height: 70px;
   display: flex;
 }
 img {
-  width: auto;
-  height: 70%;
+  width: 70px;
+  height: 70px;
   align-self: center;
-  margin: 10px;
+  padding: 0px;
+  margin: 0px;
+  border: none;
 }
 button {
   border-radius: 50%;
-  background: none;
   border: none;
+  /* cursor: pointer; */
+  height: 70px;
+  width: 70px;
+  align-self: center;
+  padding: none;
+  margin: none;
+  background: none;
 }
