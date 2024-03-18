@@ -2,6 +2,7 @@
 // const synth = new Tone.Synth().toDestination();
 // synth.volume.value = -12;
 var keyboardInput = false;
+var isPlaying = false;
 const KEYS = [
   "1",
   "!",
@@ -272,7 +273,7 @@ function setup() {
     //only if key is pressed do we trigger a sound, not when it is released (prevents double-triggered notes)
     if (v.state == true) {
       players[v.note - 36].start();
-      if (!keyboardInput) {
+      if (!keyboardInput && !isPlaying) {
         inputBox.value = inputBox.value + KEYS[v.note - 36];
       }
     }
@@ -288,24 +289,28 @@ function draw() {
 }
 
 function keyPressed() {
-  keyboardInput = true;
-  try {
-    piano.toggleIndex(KEYS.indexOf(key), true);
-  } catch (e) {}
+  if (!isPlaying) {
+    keyboardInput = true;
+    try {
+      piano.toggleIndex(KEYS.indexOf(key), true);
+    } catch (e) {}
+  }
 }
 
 document.addEventListener("keyup", (event) => {
-  try {
-    piano.toggleIndex(KEYS.indexOf(event.key), false);
-  } catch (e) {}
-  keyboardInput = false;
+  if (!isPlaying) {
+    try {
+      piano.toggleIndex(KEYS.indexOf(event.key), false);
+    } catch (e) {}
+    keyboardInput = false;
+  }
 });
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 const play = async () => {
+  isPlaying = true;
   playbutton.disabled = true;
-  keyboardInput = true;
   console.log(inputBox.value);
   for (const note in inputBox.value) {
     try {
@@ -314,7 +319,7 @@ const play = async () => {
     } catch (e) {}
   }
   playbutton.disabled = false;
-  keyboardInput = false;
+  isPlaying = false;
 };
 
 function forTimeOut(note_) {
